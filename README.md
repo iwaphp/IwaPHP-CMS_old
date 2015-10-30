@@ -25,3 +25,8 @@ Ensuite démarrer votre navigateur et rendez vous sur votre localhost
 
 Le script d'installation va se lancer alors, suivez les instructions.
 
+Créer une base de données MySQL dans le terminal :
+--------------------------------------------------
+
+> mysql -u root
+> CREATE DATABASE iwaphp
