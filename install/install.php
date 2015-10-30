@@ -54,16 +54,12 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email
 			<div class="alert alert-success" role="alert">Ecriture du config.php réussite !</div>
 			</div>';
 
-			$config_content = "<?php
-							# IwaPHP CMS - Système de gestion de contenu
-
-							$db = new sql_db('" . htmlentities($_POST['name_server']) . "'', '" . htmlentities($_POST['user_server']) . "', '" . htmlentities($_POST['pass_server']) . "', '" . htmlentities($_POST['db_server']) . "', false);
-							$db->prefix_tables = 'iwa_';
-
-							?>";
-
+			$file = fopen('code.txt', 'r+');
+			$line = fgets($file);
+			$config_content = $line;
 			fseek($config_file, 0);
 			fputs($config_content);
+			fclose($file);
 			fclose($config_file);
 		} else {
 			echo '<div class="container">
