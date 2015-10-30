@@ -16,56 +16,57 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email
 
 	if(file_exists('../config/config.php')) {
 
-		unlink('../config/config.php');
-		$config_file = fopen('../config/config.php', 'r+');
+		$config_file = fopen('../config/config.php', 'w');
 
 		if($config_file) {
 
+			$config_puts_content_file = fopen('../install/code.txt', 'r');
+			$content_php = stream_get_contents($config_puts_content_file);
+			$var = $content_php . "'" . htmlentities($_POST['name_server']) . "', '" . htmlentities($_POST['user_server']) . "', '" . htmlentities($_POST['pass_server']) . "', '" . htmlentities($_POST['db_server']) . "', false);";
+			fputs($config_file, $var);
+
 			echo '<div class="container">
 			<div class="alert alert-success" role="alert">Ecriture du config.php réussite !</div>
-			</div>';
+			</div>';	
 
-			$config_content = "<?php
-							# IwaPHP CMS - Système de gestion de contenu
+			fclose($config_puts_content_file);
+			fclose($config_file);		
 
-							$db = new sql_db('" . htmlentities($_POST['name_server']) . "'', '" . htmlentities($_POST['user_server']) . "', '" . htmlentities($_POST['pass_server']) . "', '" . htmlentities($_POST['db_server']) . "', false);
-							$db->prefix_tables = 'iwa_';
-
-							?>";
-
-			fseek($config_file, 0);
-			fputs($config_content);
-			fclose($config_file);
 		} else {
+
 			echo '<div class="container">
 			<div class="alert alert-danger" role="alert">Interdit d\'écrire sur le fichier, vérifiez les droits chmod !</div>
 			</div>';
+
 		}
-
-
-
 
 	} else {
 
-		$config_file = fopen('../config/config.php', 'w+');
+		touch('../config/config.php');
+		$config_file = fopen('../config/config.php', 'w');
+
 		if($config_file) {
+
+			$config_puts_content_file = fopen('../install/code.txt', 'r');
+			$content_php = stream_get_contents($config_puts_content_file);
+			$var = $content_php . "'" . htmlentities($_POST['name_server']) . "', '" . htmlentities($_POST['user_server']) . "', '" . htmlentities($_POST['pass_server']) . "', '" . htmlentities($_POST['db_server']) . "', false);";
+			fputs($config_file, $var);
 
 			echo '<div class="container">
 			<div class="alert alert-success" role="alert">Ecriture du config.php réussite !</div>
-			</div>';
+			</div>';	
 
-			$file = fopen('code.txt', 'r+');
-			$line = fgets($file);
-			$config_content = $line;
-			fseek($config_file, 0);
-			fputs($config_content);
-			fclose($file);
-			fclose($config_file);
+			fclose($config_puts_content_file);
+			fclose($config_file);		
+
 		} else {
+
 			echo '<div class="container">
 			<div class="alert alert-danger" role="alert">Interdit d\'écrire sur le fichier, vérifiez les droits chmod !</div>
 			</div>';
+
 		}
+			
 
 	}
 	 
@@ -76,14 +77,14 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email
 		echo '<div class="container">
 		<div class="alert alert-success" role="alert">Connexion MySQL réussite !</div>
 		</div>';
-		mysql_query('CREATE DATABASE IF NOT EXISTS '.htmlentities($_POST['name_server']).'');
+		mysql_query('CREATE DATABASE IF NOT EXISTS '.htmlentities($_POST['db_server']).'');
 		$db_select = mysql_select_db(htmlentities($_POST['db_server']));
 		if($db_select) {
 			echo '<div class="container">
 			<div class="alert alert-success" role="alert">Connexion à '.htmlentities($_POST['db_server']).' réussite !</div>
 			</div>';
 
-			include dirname(__FILE__).'sql.php';
+			include dirname(__FILE__).'/sql.php';
 
 			$sql_schema_articles = mysql_query($schema_articles);
 			$sql_schema_friends = mysql_query($schema_friends);
@@ -93,7 +94,6 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email
 			$sql_schema_livredor_options = mysql_query($schema_livredor_options);
 			$sql_schema_livredor_options_content = mysql_query($schema_livredor_options_content);
 			$sql_schema_membre = mysql_query($schema_membre);
-			$sql_schema_membre_content = mysql_query($schema_membre_content);
 			$sql_schema_menu = mysql_query($schema_menu);
 			$sql_schema_menu_content = mysql_query($schema_menu_content);
 			$sql_schema_menu_contenu = mysql_query($schema_menu_contenu);
@@ -116,6 +116,8 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email
 			$sql_schema_statut_content = mysql_query($schema_statut_content);
 			$sql_schema_whosonline = mysql_query($schema_whosonline);
 			$sql_schema_update = mysql_query($schema_update);
+			$sql_schema_update_content = mysql_query($schema_update_content);
+
 
 			echo ($sql_schema_articles == true ? '<div class="container"><div class="alert alert-success" role="alert">schema_articles : Requête SQL effectué !</div></div>' :  '<div class="container"><div class="alert alert-danger" role="alert">Requête impossible !</div></div>');
 			echo ($sql_schema_friends == true ?  '<div class="container"><div class="alert alert-success" role="alert">schema_friends : Requête SQL effectué !</div></div>' :  '<div class="container"><div class="alert alert-danger" role="alert">Requête impossible !</div></div>');
@@ -126,12 +128,12 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email
 			echo ($sql_schema_livredor_options_content == true ?  '<div class="container"><div class="alert alert-success" role="alert">schema_livredor_options_content : Requête SQL effectué !</div></div>' :  '<div class="container"><div class="alert alert-danger" role="alert">Requête impossible !</div></div>');
 			echo ($sql_schema_membre == true ?  '<div class="container"><div class="alert alert-success" role="alert">schema_membre : Requête SQL effectué !</div></div>' :  '<div class="container"><div class="alert alert-danger" role="alert">Requête impossible !</div></div>');
 			
-			$schema_membre_content = mysql_query("
+			$sql_schema_membre_content = mysql_query("
 			INSERT INTO `iwa_membre` (`id`, `pseudo`, `pass`, `grade`, `mail`, `confirm`, `nom`, `prenom`, `pays`, `born`, `sexe`, `website`, `avatar`, `signature`, `pensebete`, `photoperso`, `lastquerytime`, `theme_selected`, `banni`, `averto`, `ddn_jour`, `ddn_mois`, `ddn_annee`, `derniere_visite`, `post`, `inscrit`) VALUES
 			('', '".htmlentities($_POST['username'])."', '".md5($_POST['password'])."', '1', '".htmlentities($_POST['email'])."', '', '', '', '', '', 'homme', '', '', '', '', '', 0, 'dreamgray2', '0', '', '1', 'janvier', '1950', '', '', '');");
 
 
-			echo ($sql_schema_membre_content == true ? '<div class="container"><div class="alert alert-success" role="alert">schema_membre_content : Requête SQL effectué !</div></div><div class="alert alert-success" role="alert">schema_membre_content : Role admin '.htmlentities($_POST['username']).' crée !</div></div>' : '<div class="container"><div class="alert alert-danger" role="alert">Requête impossible !</div></div>');
+			echo ($sql_schema_membre_content == true ? '<div class="container"><div class="alert alert-success" role="alert">schema_membre_content : Requête SQL effectué !</div><div class="alert alert-info" role="alert"><strong>Super utilisateur '.htmlentities($_POST['username']).' ajouté !</strong></div></div>' : '<div class="container"><div class="alert alert-danger" role="alert">Requête impossible !</div></div>');
 			echo ($sql_schema_menu == true ? '<div class="container"><div class="alert alert-success" role="alert">schema_menu : Requête SQL effectué !</div></div>' : '<div class="container"><div class="alert alert-danger" role="alert">Requête impossible !</div></div>');
 			echo ($sql_schema_menu_content == true ? '<div class="container"><div class="alert alert-success" role="alert">schema_menu_content : Requête SQL effectué !</div></div>' : '<div class="container"><div class="alert alert-danger" role="alert">Requête impossible !</div></div>');
 			echo ($sql_schema_menu_contenu == true ? '<div class="container"><div class="alert alert-success" role="alert">schema_menu_contenu : Requête SQL effectué !</div></div>' : '<div class="container"><div class="alert alert-danger" role="alert">Requête impossible !</div></div>');
@@ -153,9 +155,11 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email
 			echo ($sql_schema_statut == true ? '<div class="container"><div class="alert alert-success" role="alert">schema_statut : Requête SQL effectué !</div></div>' : '<div class="container"><div class="alert alert-danger" role="alert">Requête impossible !</div></div>');
 			echo ($sql_schema_statut_content == true ? '<div class="container"><div class="alert alert-success" role="alert">schema_statut_content : Requête SQL effectué !</div></div>' : '<div class="container"><div class="alert alert-danger" role="alert">Requête impossible !</div></div>');
 			echo ($sql_schema_update == true ? '<div class="container"><div class="alert alert-success" role="alert">schema_update : Requête SQL effectué !</div></div>' : '<div class="container"><div class="alert alert-danger" role="alert">Requête impossible !</div></div>');
+			echo ($sql_schema_update_content == true ? '<div class="container"><div class="alert alert-success" role="alert">schema_update_content : Requête SQL effectué !</div></div>' : '<div class="container"><div class="alert alert-danger" role="alert">Requête impossible !</div></div>');	
 			echo ($sql_schema_whosonline == true ? '<div class="container"><div class="alert alert-success" role="alert">schema_whosonline : Requête SQL effectué !</div></div>' : '<div class="container"><div class="alert alert-danger" role="alert">Requête impossible !</div></div>');
 
-			echo '<div class="alert alert-info" role="alert">INSTALLATION TERMINEE : <br /> Merci de supprimer le dossier "install/"</div>';
+			echo '<div class="container"><div class="alert alert-info" role="alert"><h1>Processus d\'installation terminé :</h1> <br /> Merci de vérifier le log d\'installation ci-dessus, à l\'avenir n\'oubliez pas de supprimer le dossier "install/" à la racine du site.<br /><a href="../index.php"> --> Voir le site</a></div><hr /></div>';
+
 		} else {
 			echo '<div class="container">
 			<div class="alert alert-danger" role="alert">'.htmlentities($_POST['db_server']).' introuvable !</div>
@@ -195,11 +199,11 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email
 		<div class="form-group">Mot de passe :* <input class="form-control" class="form-control" type="password" name="password" required/></div>
 		<div class="form-group">E-mail :* <input class="form-control" type="email" name="email" required/></div>
 		<h2>Connexion MySQL</h2>
-		<div class="form-group">Serveur :* <input class="form-control" type="text" name="name_server" placeholder="localhost" required/></div>
-		<div class="form-group">Nom d'utilisateur :* <input class="form-control" type="text" name="user_server" placeholder="root" required/></div>
+		<div class="form-group">Serveur :* <input class="form-control" type="text" name="name_server" value="localhost" required/></div>
+		<div class="form-group">Nom d'utilisateur :* <input class="form-control" type="text" name="user_server" value="root" required/></div>
 		<div class="form-group">Mot de passe :* <input class="form-control" type="password" name="pass_server" required/></div>
 		<div class="form-group">
-			Nom de la base de données MySQL :* <input class="form-control" type="text" name="db_server" placeholder="iwaphp" required/>
+			Nom de la base de données MySQL :* <input class="form-control" type="text" name="db_server" value="iwaphp" required/>
 		</div>
 		<button type="submit" class="btn btn-default">Install</button> (*:required)
 	  </div>
