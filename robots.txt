@@ -1,0 +1,4 @@
+User-agent:  almaden
+Disallow:  /
+
+User-agent:  *
