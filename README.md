@@ -13,7 +13,7 @@ Installation de IwaPHP CMS old :
 
 Commandes Linux :
 
-> git clone git@github.com:iwaphp/IwaPHP-CMS_old.git
+> git clone https://github.com/iwaphp/IwaPHP-CMS_old.git
 
 > cd IwaPHP-CMS_old
 
