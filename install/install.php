@@ -80,6 +80,7 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email
 		echo '<div class="container">
 		<div class="alert alert-success" role="alert">Connexion MySQL réussite !</div>
 		</div>';
+		mysql_query('CREATE DATABASE IF NOT EXISTS '.htmlentities($_POST['name_server']).'');
 		$db_select = mysql_select_db(htmlentities($_POST['db_server']));
 		if($db_select) {
 			echo '<div class="container">
@@ -203,7 +204,6 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email
 		<div class="form-group">Mot de passe :* <input class="form-control" type="password" name="pass_server" required/></div>
 		<div class="form-group">
 			Nom de la base de données MySQL :* <input class="form-control" type="text" name="db_server" placeholder="iwaphp" required/>
-			<p><div class="alert alert-warning" role="alert">Veuillez prendre soin d'avoir préalablement créer la base de données</div></p>
 		</div>
 		<button type="submit" class="btn btn-default">Install</button> (*:required)
 	  </div>
