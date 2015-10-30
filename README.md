@@ -21,7 +21,7 @@ Commandes Linux :
 
 Ensuite démarrer votre navigateur et rendez vous sur votre localhost
 
-http://localhost/IwaPHP-CMS_old/
+<http://localhost/IwaPHP-CMS_old/>
 
-Le script d'installation va se lancer alors, et suivez les instructions.
+Le script d'installation va se lancer alors, suivez les instructions.
 
