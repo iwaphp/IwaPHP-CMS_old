@@ -1,1 +1,1 @@
-<?php $db = new sql_db('" . htmlentities($_POST['name_server']) . "'', '" . htmlentities($_POST['user_server']) . "', '" . htmlentities($_POST['pass_server']) . "', '" . htmlentities($_POST['db_server']) . "', false); $db->prefix_tables = 'iwa_';
+<?php $db = new sql_db(

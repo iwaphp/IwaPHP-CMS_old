@@ -22,6 +22,7 @@ if (!file_exists($index->rootpath.'/config/config'.$index->phpEx)) {
 
 	# fichier de configuration et de r�cup�ration
 	require $index->rootpath.'/config/config'.$index->phpEx;
+	$db->prefix_tables = 'iwa_';
 	require $index->rootpath.'/recovery'.$index->phpEx;
 
 	if (isset($_SESSION['pseudo'])) {

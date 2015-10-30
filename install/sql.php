@@ -34,7 +34,7 @@ $schema_articles = "
 
 			$schema_groupes_content = "
 			INSERT INTO `iwa_groupes` (`id`, `nom`, `description`, `niveaux`, `couleur`) VALUES
-			(1, 'Administrateurs', '', '1', '$cc0000'),
+			(1, 'Administrateurs', '', '1', '#cc0000'),
 			(2, 'Modérateurs', '', '2', 'test'),
 			(7, 'Privilégiés', '', '3', '');";
 
@@ -323,7 +323,7 @@ $schema_articles = "
 
 			$schema_options_content ="
 			INSERT INTO `iwa_options` (`id`, `nom_site`, `url_script`, `url_site`, `module_demarrage`, `nom_licence`, `copyrights`, `url_logo`, `description`, `keywords`, `theme`, `edito`, `email_admin`, `regles_de_site`, `regles_active`, `lang_general`, `grade_visiteurs`, `travaux`, `changer_pseudo`, `changer_email`, `popup_update`, `active_memberlist`, `active_user`, `autoriser_upload_fichier`, `repertoire_envoi_upload`, `quota_max_upload`, `quota_max_upload_memoiretype`, `taille_max_fichier_upload`, `taille_max_fichier_upload_memoiretype`, `max_fichier_joint_msg_prive`, `afficher_img_upload`, `largeur_max_img_joint`, `hauteur_max_img_joint`, `autoriser_avatars`, `autoriser_envoi_avatars`, `poid_max_avatar`, `poid_max_avatar_memoiretype`, `repertoire_stockage_avatars`, `largeur_max_avatar`, `hauteur_max_avatar`, `activer_messagerie_privee`, `nbr_max_dossiers`, `nbr_msg_privee_max_dossier`, `faire_quand_boite_reception_pleine`, `autoriser_bbcodes`, `autoriser_smileys`, `autoriser_fichiers_joints`, `autoriser_surveillance_reponses`, `autoriser_liens_msg`, `confirmation_visuelle_visiteurs`, `largeur_max_img_msg`, `hauteur_max_img_msg`, `autoriser_bbcodes_msg`, `autoriser_fichiers_joints_msg`, `autoriser_smileys_msg`, `autoriser_signatures`, `autoriser_bbcodes_signatures`, `nbr_max_img_signature`, `largeur_max_img_signature`, `hauteur_max_img_signature`, `autoriser_liens_signatures`, `autoriser_img_signatures`, `autoriser_smileys_signatures`, `activation_compte`, `long_max_nom_utilisateur`, `long_min_nom_utilisateur`, `interdire_caractere_nom_utilisateur`, `complexite_mdp`, `long_min_mdp`, `expiration_mdp`, `autoriser_enregistrement_email_multi`, `activer_confirm_visuelle_inscription`, `nom_expediteur`, `fonction_envoi_mail`, `video_preview`, `downloads_preview`, `infos_preview`) VALUES
-			(1, 'Mon site', 'C:wampwwwwampIwaPHP-CMS', 'http://localhost/', 'news', 'votre nom', '', 'logo.png', 'Description', 'keyword1, keyword2', 'dreamgray2', '<h1 style=\"color: #ff0000; text-align: center;">Bienvenue sur la page d''accueil !</h1>\r\n<p style=\"text-align: center;\"><img src=\"logo.png\" alt=\"\" width=\"130\" height=\"37\" /></p>', 'admin@serveur.ex', '', 'non', 'francais', 'Utilisateur', 'disabled', 'non', 'non', 'non', 'oui', 'oui', 'oui', 'systeme/uploads/', '10', 'ko', '1', 'mo', '3', 'oui', '600', '800', 'oui', 'oui', '800', 'ko', 'systeme/images/uploads/', '120', '120', 'oui', '15', '20', 'supp_ancien', 'oui', 'oui', 'oui', 'oui', 'oui', 'non', '600', '800', 'oui', 'oui', 'oui', 'oui', 'oui', '1', '400', '150', 'oui', 'oui', 'oui', 'email', '18', '3', '~, #, {, (, |, ,^, @, ], [, ), }, =, +, °, *, /, <, >', 'non', '6', '0', 'non', 'oui', 'admin', 'mail', '', '', '');";
+			(1, 'Mon site', 'C:wampwwwwampIwaPHP-CMS', 'http://localhost/', 'news', 'votre nom', '', 'logo.png', 'Description', 'keyword1, keyword2', 'dreamgray2', '<h1 style=\"color: #ff0000; text-align: center;\">Bienvenue sur la page d''accueil !</h1>\r\n<p style=\"text-align: center;\"><img src=\"logo.png\" alt=\"\" width=\"130\" height=\"37\" /></p>', 'admin@serveur.ex', '', 'non', 'francais', 'Utilisateur', 'disabled', 'non', 'non', 'non', 'oui', 'oui', 'oui', 'systeme/uploads/', '10', 'ko', '1', 'mo', '3', 'oui', '600', '800', 'oui', 'oui', '800', 'ko', 'systeme/images/uploads/', '120', '120', 'oui', '15', '20', 'supp_ancien', 'oui', 'oui', 'oui', 'oui', 'oui', 'non', '600', '800', 'oui', 'oui', 'oui', 'oui', 'oui', '1', '400', '150', 'oui', 'oui', 'oui', 'email', '18', '3', '~, #, {, (, |, ,^, @, ], [, ), }, =, +, °, *, /, <, >', 'non', '6', '0', 'non', 'oui', 'admin', 'mail', '', '', '');";
 
 			$schema_statut="
 			CREATE TABLE IF NOT EXISTS `iwa_statut` (
@@ -336,9 +336,9 @@ $schema_articles = "
 
 			$schema_statut_content="
 			INSERT INTO `iwa_statut` (`id`, `id_`, `statut`) VALUES
-			(2, 36, 'online');";";
+			(2, 36, 'online');";
 
-			$schema_
+			$schema_update = "
 			CREATE TABLE IF NOT EXISTS `iwa_update` (
 			  `id` bigint(20) NOT NULL AUTO_INCREMENT,
 			  `nom` varchar(255) NOT NULL,
@@ -346,7 +346,7 @@ $schema_articles = "
 			  KEY `id` (`id`)
 			) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;";
 
-			$schema_update = "
+			$schema_update_content = "
 			INSERT INTO `iwa_update` (`id`, `nom`, `valeur`) VALUES
 			(1, 'popup_update', '');";
 
