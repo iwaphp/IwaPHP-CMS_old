@@ -3,8 +3,7 @@ Première version de IwaPHP CMS dépréciée
 
 IwaPHP CMS est un système de gestion de contenu codé en PHP utilisant la base de données MySQL.
 Le projet a été crée en 2007 et en permanence réadapté pour la comptabilité PHP.
-Cette version est dépréciée donc unstable, une refonte complète est en cours avec le pattern MVC. 
-Je vous déconseille donc fortement de l'utiliser pour créer votre site, des failles de sécurité sont probablement présentes.
+Cette version est dépréciée donc unstable, je vous déconseille donc fortement de l'utiliser pour créer votre site, des failles de sécurité sont probablement présentes. Une refonte complète est en cours avec le pattern MVC.
 
 Lien vers le dépot de la refonte du projet :
 https://github.com/iwaphp/IwaPHP-CMS_recast
