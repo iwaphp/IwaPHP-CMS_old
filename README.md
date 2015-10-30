@@ -29,4 +29,5 @@ Créer une base de données MySQL dans le terminal :
 --------------------------------------------------
 
 > mysql -u root
+
 > CREATE DATABASE iwaphp
