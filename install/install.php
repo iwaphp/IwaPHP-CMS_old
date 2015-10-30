@@ -201,7 +201,10 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email
 		<div class="form-group">Serveur :* <input class="form-control" type="text" name="name_server" placeholder="localhost" required/></div>
 		<div class="form-group">Nom d'utilisateur :* <input class="form-control" type="text" name="user_server" placeholder="root" required/></div>
 		<div class="form-group">Mot de passe :* <input class="form-control" type="password" name="pass_server" required/></div>
-		<div class="form-group">Nom de la base de données MySQL :* <input class="form-control" type="text" name="db_server" placeholder="iwaphp" required/></div>
+		<div class="form-group">
+			Nom de la base de données MySQL :* <input class="form-control" type="text" name="db_server" placeholder="iwaphp" required/>
+			<p><div class="alert alert-warning" role="alert">Veuillez prendre soin d'avoir préalablement créer la base de données</div></p>
+		</div>
 		<button type="submit" class="btn btn-default">Install</button> (*:required)
 	  </div>
 	</form><?php } ?>	  
