@@ -1,0 +1,1 @@
+<?php $db = new sql_db('localhost', 'root', 'root', 'iwaphp', false);
